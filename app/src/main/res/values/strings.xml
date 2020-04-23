@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Auditus</string>
+
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+
+    <string name="missing_audio_permission">Missing audio permission</string>
+
+    <string name="missing_bt_device">Please connect your earbuds to your Bluetooth device</string>
+
+    <string name="stream_active">Stream active</string>
+    <string name="stream_inactive">Ready to start</string>
+
+    <string name="device_name">Device Name</string>
+    <string name="auto_select">Auto Select</string>
+    <string name="recording_device">Recording device</string>
+    <string name="playback_device">Playback device</string>
+
+    <string name="go_to_settings">GO TO SETTINGS</string>
+
+    <string name="info">INFO</string>
+    <string name="version">version %1$s</string>
+    <string name="infoText">INFO</string>
+    <string name="about">Auditus is the tool that helps frontline staff to communicate unobstructed when wearing masks and PPE.</string>
+    <string name="guideTitle">Quick setup guide:</string>
+    <string name="guide1">1. Pair and connect your Bluetooth earbuds to your Android device in the settings.</string>
+    <string name="guide2">2. Place the earbud with the microphone (usually right earbud) inside your protective mask.</string>
+    <string name="guide3">3. Press the Play button and start communicating.</string>
+    <string name="guide4">4. You can connect your device to a speaker with a cable. Volume can be adjusted on your device.</string>
+    <string name="disclaimer">Disclaimer: Auditus is not a certified tool and does not replace certified equipment. The authors and anyone associated with the authors assume no liability and make no representation, warranties, or guarantee of any kind. The use of this app is at your own risk.</string>
+    <string name="link">www.zascitimo.si/auditus</string>
+</resources>
