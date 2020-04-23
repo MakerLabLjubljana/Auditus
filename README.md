@@ -1,4 +1,4 @@
-![Auditus](img/banner.png "Auditus")
+![Auditus](/img/auditus-featurephoto.jpg)
 
 # Auditus
 Auditus is a tool that helps frontline staff with communication while wearing a mask and PPE.
