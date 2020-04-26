@@ -1,4 +1,4 @@
-package si.zascitimo.auditus
+package si.zascitimo.auditus.main
 
 import android.Manifest
 import android.bluetooth.BluetoothAdapter
@@ -9,7 +9,12 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.Observer
+import si.zascitimo.auditus.App
+import si.zascitimo.auditus.audio.AudioService
 import si.zascitimo.auditus.databinding.ActivityMainBinding
+import si.zascitimo.auditus.prefs
+import si.zascitimo.auditus.settings.SettingsActivity
+import si.zascitimo.auditus.welcome.WelcomeActivity
 import timber.log.Timber
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +29,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (prefs.showWelcome) {
+            startActivity(
+                Intent(
+                    this,
+                    WelcomeActivity::class.java
+                ).addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION)
+            )
+        }
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
@@ -31,30 +45,60 @@ class MainActivity : AppCompatActivity() {
         Timber.d("Start")
 
         binding.btnInfo.setOnClickListener {
-            InfoFragment().show(supportFragmentManager, "info")
+            InfoFragment()
+                .show(supportFragmentManager, "info")
         }
 
         binding.btnPlay.setOnClickListener {
-            startService(AudioService.startIntent(this))
+            startService(
+                AudioService.startIntent(
+                    this
+                )
+            )
         }
 
         binding.btnPause.setOnClickListener {
-            startService(AudioService.stopIntent(this))
+            startService(
+                AudioService.stopIntent(
+                    this
+                )
+            )
         }
 
         binding.btnSettings.setOnClickListener {
+            startActivity(Intent(this, SettingsActivity::class.java))
+        }
+
+        binding.btnDictation.setOnClickListener {
+            STTFragment()
+                .show(supportFragmentManager, "stt")
         }
 
         binding.btnBtSettings.setOnClickListener {
             if (bluetoothAdapter != null) {
+//                val filter = IntentFilter("android.bluetooth.devicepicker.action.DEVICE_SELECTED")
+//                registerReceiver(object : BroadcastReceiver() {
+//                    override fun onReceive(context: Context?, intent: Intent?) {
+//                        val btDevice = intent?.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE) as? BluetoothDevice
+//                        btDevice?.createBond()
+//                        Timber.d("onReceive")
+//                    }
+//
+//                }, filter)
+//                try {
+//                    startActivity(Intent("android.bluetooth.devicepicker.action.LAUNCH"))
+////                    startActivity(Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
+//                } catch (e: Exception) {
+//                    try {
+//                        startActivity(Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
+//                    } catch (e: Exception) {
+//                    }
+//                }
                 try {
-                    startActivity(Intent("android.bluetooth.devicepicker.action.LAUNCH"))
+                    startActivity(Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
                 } catch (e: Exception) {
-                    try {
-                        startActivity(Intent(android.provider.Settings.ACTION_BLUETOOTH_SETTINGS))
-                    } catch (e: Exception) {
-                    }
                 }
+
             }
         }
 
@@ -74,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                     binding.imgWiredSpeaker.visibility = View.GONE
                     binding.btnPlay.visibility = View.GONE
                     binding.btnPause.visibility = View.GONE
+                    binding.btnDictation.visibility = View.GONE
                 }
                 it.missingPlaybackDevice -> {
                     binding.groupNoMic.visibility = View.GONE
@@ -82,10 +127,12 @@ class MainActivity : AppCompatActivity() {
                     binding.imgWiredSpeaker.visibility = View.GONE
                     binding.btnPlay.visibility = View.GONE
                     binding.btnPause.visibility = View.GONE
+                    binding.btnDictation.visibility = View.GONE
                 }
                 else -> {
                     binding.groupNoMic.visibility = View.GONE
                     binding.imgNoPlayback.visibility = View.GONE
+                    binding.btnDictation.visibility = View.VISIBLE
                     when {
                         it.inInternalSpeaker -> {
                             binding.imgInternalSpeaker.visibility = View.VISIBLE
@@ -98,12 +145,12 @@ class MainActivity : AppCompatActivity() {
                     }
                     when {
                         it.isStreamActive -> {
-                            binding.btnPlay.visibility = View.GONE
+                            binding.btnPlay.visibility = View.INVISIBLE
                             binding.btnPause.visibility = View.VISIBLE
                         }
                         else -> {
                             binding.btnPlay.visibility = View.VISIBLE
-                            binding.btnPause.visibility = View.GONE
+                            binding.btnPause.visibility = View.INVISIBLE
                         }
                     }
                 }
@@ -115,38 +162,6 @@ class MainActivity : AppCompatActivity() {
         })
 
         startService(AudioService.initIntent(this))
-
-//        binding.recordingDevicesSpinner.setDirectionType(AudioManager.GET_DEVICES_INPUTS)
-//        binding.recordingDevicesSpinner.onItemSelectedListener = object : OnItemSelectedListener {
-//            override fun onItemSelected(
-//                adapterView: AdapterView<*>?,
-//                view: View,
-//                i: Int,
-//                l: Long
-//            ) {
-//                audioRouter.customRecordingDevice =
-//                    (binding.recordingDevicesSpinner.selectedItem as AudioDeviceListEntry?)?.id
-//            }
-//
-//            override fun onNothingSelected(adapterView: AdapterView<*>?) { // Do nothing
-//            }
-//        }
-//
-//        binding.playbackDevicesSpinner.setDirectionType(AudioManager.GET_DEVICES_OUTPUTS)
-//        binding.playbackDevicesSpinner.onItemSelectedListener = object : OnItemSelectedListener {
-//            override fun onItemSelected(
-//                adapterView: AdapterView<*>?,
-//                view: View,
-//                i: Int,
-//                l: Long
-//            ) {
-//                audioRouter.customPlaybackDevice =
-//                    (binding.playbackDevicesSpinner.selectedItem as AudioDeviceListEntry?)?.id
-//            }
-//
-//            override fun onNothingSelected(adapterView: AdapterView<*>?) { // Do nothing
-//            }
-//        }
     }
 
     override fun onStart() {
@@ -171,5 +186,9 @@ class MainActivity : AppCompatActivity() {
         } else {
 //            binding.statusText.text = ""
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
     }
 }

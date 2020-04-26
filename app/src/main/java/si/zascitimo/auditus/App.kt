@@ -3,7 +3,13 @@ package si.zascitimo.auditus
 import android.app.Application
 import androidx.lifecycle.MediatorLiveData
 import com.example.auditus.AudioRouter
+import si.zascitimo.auditus.audio.ActiveDevices
+import si.zascitimo.auditus.audio.AudioStatus
 import timber.log.Timber
+
+val prefs: Prefs by lazy {
+    App.prefs
+}
 
 class App : Application() {
 
@@ -17,6 +23,8 @@ class App : Application() {
         System.loadLibrary("native-lib")
 
         Timber.plant(Timber.DebugTree())
+
+        prefs = Prefs(applicationContext)
 
         audioStatus.addSource(audioRouter.activeDevice) {
             audioStatus.value = AudioStatus(
@@ -35,5 +43,9 @@ class App : Application() {
                 activeDevice.wiredSpeaker == null
             )
         }
+    }
+
+    companion object {
+        lateinit var prefs: Prefs
     }
 }

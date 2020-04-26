@@ -25,7 +25,7 @@ public class AudioDeviceInfoConverter {
      * @param adi The AudioDeviceInfo object to be converted to a String
      * @return String containing all the information from the AudioDeviceInfo object
      */
-    public static String toString(AudioDeviceInfo adi){
+    public static String toString(AudioDeviceInfo adi) {
 
         StringBuilder sb = new StringBuilder();
         sb.append("Id: ");
@@ -72,11 +72,11 @@ public class AudioDeviceInfoConverter {
      * @param integerArray the integer array to convert to a string
      * @return string containing all the integer values separated by spaces
      */
-    private static String intArrayToString(int[] integerArray){
+    private static String intArrayToString(int[] integerArray) {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < integerArray.length; i++){
+        for (int i = 0; i < integerArray.length; i++) {
             sb.append(integerArray[i]);
-            if (i != integerArray.length -1) sb.append(" ");
+            if (i != integerArray.length - 1) sb.append(" ");
         }
         return sb.toString();
     }
@@ -84,24 +84,25 @@ public class AudioDeviceInfoConverter {
     /**
      * Converts the value from {@link AudioDeviceInfo#getType()} into a human
      * readable string
+     *
      * @param type One of the {@link AudioDeviceInfo}.TYPE_* values
      *             e.g. AudioDeviceInfo.TYPE_BUILT_IN_SPEAKER
      * @return string which describes the type of audio device
      */
-    public static String typeToString(int type){
+    public static String typeToString(int type) {
         switch (type) {
             case AudioDeviceInfo.TYPE_AUX_LINE:
-                return "auxiliary line-level connectors";
+                return "Aux Line";
             case AudioDeviceInfo.TYPE_BLUETOOTH_A2DP:
-                return "Bluetooth device supporting the A2DP profile";
+                return "Bluetooth A2DP Controls";
             case AudioDeviceInfo.TYPE_BLUETOOTH_SCO:
-                return "Bluetooth device typically used for telephony";
+                return "Bluetooth Device";
             case AudioDeviceInfo.TYPE_BUILTIN_EARPIECE:
-                return "built-in earphone speaker";
+                return "Built-in Earphone";
             case AudioDeviceInfo.TYPE_BUILTIN_MIC:
-                return "built-in microphone";
+                return "Built-in Microphone";
             case AudioDeviceInfo.TYPE_BUILTIN_SPEAKER:
-                return "built-in speaker";
+                return "Built-in Speaker";
             case AudioDeviceInfo.TYPE_BUS:
                 return "BUS";
             case AudioDeviceInfo.TYPE_DOCK:
@@ -109,29 +110,29 @@ public class AudioDeviceInfoConverter {
             case AudioDeviceInfo.TYPE_FM:
                 return "FM";
             case AudioDeviceInfo.TYPE_FM_TUNER:
-                return "FM tuner";
+                return "FM Tuner";
             case AudioDeviceInfo.TYPE_HDMI:
                 return "HDMI";
             case AudioDeviceInfo.TYPE_HDMI_ARC:
-                return "HDMI audio return channel";
+                return "HDMI Audio Return Channel";
             case AudioDeviceInfo.TYPE_IP:
                 return "IP";
             case AudioDeviceInfo.TYPE_LINE_ANALOG:
-                return "line analog";
+                return "Analog Line";
             case AudioDeviceInfo.TYPE_LINE_DIGITAL:
-                return "line digital";
+                return "Digital Line";
             case AudioDeviceInfo.TYPE_TELEPHONY:
-                return "telephony";
+                return "Telephony Device";
             case AudioDeviceInfo.TYPE_TV_TUNER:
-                return "TV tuner";
+                return "TV Tuner";
             case AudioDeviceInfo.TYPE_USB_ACCESSORY:
-                return "USB accessory";
+                return "USB Accessory";
             case AudioDeviceInfo.TYPE_USB_DEVICE:
-                return "USB device";
+                return "USB Device";
             case AudioDeviceInfo.TYPE_WIRED_HEADPHONES:
-                return "wired headphones";
+                return "Wired Headphones";
             case AudioDeviceInfo.TYPE_WIRED_HEADSET:
-                return "wired headset";
+                return "Wired Headset";
             default:
             case AudioDeviceInfo.TYPE_UNKNOWN:
                 return "unknown";

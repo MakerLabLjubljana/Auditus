@@ -1,4 +1,4 @@
-package si.zascitimo.auditus
+package si.zascitimo.auditus.audio
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -14,6 +14,8 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.graphics.drawable.toBitmap
 import androidx.lifecycle.LifecycleService
 import androidx.lifecycle.Observer
+import si.zascitimo.auditus.App
+import si.zascitimo.auditus.R
 
 class AudioService : LifecycleService() {
 
@@ -84,11 +86,15 @@ class AudioService : LifecycleService() {
             destroyIntent(this),
             PendingIntent.FLAG_UPDATE_CURRENT
         )
-        return NotificationCompat.Builder(this, CHANNEL_ID)
+        return NotificationCompat.Builder(this,
+            CHANNEL_ID
+        )
             .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle(getString(R.string.app_name))
             .setContentText(getString(R.string.stream_active))
-            .setLargeIcon(AppCompatResources.getDrawable(this, R.drawable.ic_play)?.toBitmap() )
+            .setLargeIcon(AppCompatResources.getDrawable(this,
+                R.drawable.ic_play
+            )?.toBitmap() )
             .setOngoing(true)
             .addAction(0, getString(R.string.stop), pi)
             .build()

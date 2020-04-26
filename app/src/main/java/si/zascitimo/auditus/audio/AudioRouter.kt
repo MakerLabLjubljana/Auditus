@@ -19,6 +19,8 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import si.zascitimo.auditus.*
+import si.zascitimo.auditus.audio.ActiveDevices
+import si.zascitimo.auditus.audio.AudioDevicesState
 import timber.log.Timber
 
 class AudioRouter(
@@ -49,12 +51,12 @@ class AudioRouter(
     private var currentRecordingDevice: AudioDeviceInfo? = null
     private var currentPlaybackDevice: AudioDeviceInfo? = null
 
-    var customRecordingDevice: Int? = null
+    var customRecordingDevice: Int? = prefs.recordDevice
         set(value) {
             field = value
             updateState()
         }
-    var customPlaybackDevice: Int? = null
+    var customPlaybackDevice: Int? = prefs.playbackDevice
         set(value) {
             field = value
             updateState()
@@ -175,15 +177,16 @@ class AudioRouter(
             else -> null
         }
 
-        mutableAudioDeviceState.value = AudioDevicesState(
-            recordingDevice,
-            playbackDevice,
-            activeDevice?.btDevice,
-            activeDevice?.wiredSpeaker,
-            activeDevice?.internalSpeaker,
-            activeDevice?.customRecording,
-            activeDevice?.customPlayback
-        )
+        mutableAudioDeviceState.value =
+            AudioDevicesState(
+                recordingDevice,
+                playbackDevice,
+                activeDevice?.btDevice,
+                activeDevice?.wiredSpeaker,
+                activeDevice?.internalSpeaker,
+                activeDevice?.customRecording,
+                activeDevice?.customPlayback
+            )
 
         if (recordingDevice == null) {
             Timber.w("Missing recordingDevice")

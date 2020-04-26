@@ -1,4 +1,4 @@
-package si.zascitimo.auditus
+package si.zascitimo.auditus.audio
 
 data class AudioStatus(
     val missingBtDevice: Boolean,

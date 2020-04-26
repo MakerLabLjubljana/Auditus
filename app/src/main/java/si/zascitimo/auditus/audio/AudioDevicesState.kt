@@ -1,4 +1,4 @@
-package si.zascitimo.auditus
+package si.zascitimo.auditus.audio
 
 import android.media.AudioDeviceInfo
 import com.google.sample.audio_device.AudioDeviceInfoConverter

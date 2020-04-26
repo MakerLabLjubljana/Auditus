@@ -77,7 +77,7 @@ public class AudioDeviceListEntry {
      * @return A list of AudioDeviceListEntry objects
      */
     @TargetApi(23)
-    static List<AudioDeviceListEntry> createListFrom(AudioDeviceInfo[] devices, int directionType){
+    public static List<AudioDeviceListEntry> createListFrom(AudioDeviceInfo[] devices, int directionType){
 
         List<AudioDeviceListEntry> listEntries = new Vector<>();
         for (AudioDeviceInfo info : devices) {

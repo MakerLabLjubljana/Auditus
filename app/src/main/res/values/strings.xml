@@ -13,6 +13,7 @@
 
     <string name="device_name">Device Name</string>
     <string name="auto_select">Auto Select</string>
+    <string name="devices">Device</string>
     <string name="recording_device">Recording device</string>
     <string name="playback_device">Playback device</string>
 
@@ -29,4 +30,18 @@
     <string name="guide4">4. You can connect your device to a speaker with a cable. Volume can be adjusted on your device.</string>
     <string name="disclaimer">Disclaimer: Auditus is not a certified tool and does not replace certified equipment. The authors and anyone associated with the authors assume no liability and make no representation, warranties, or guarantee of any kind. The use of this app is at your own risk.</string>
     <string name="link">www.zascitimo.si/auditus</string>
+
+    <string name="dictation">DICTATION</string>
+    <string name="settings">SETTINGS</string>
+
+    <string name="welcome_to_auditus">Welcome to Auditus</string>
+    <string name="welcome_desc">Auditus is a tool that helps frontline staff with communication while wearing a mask and PPE.</string>
+    <string name="get_started">GET STARTED</string>
+
+    <string name="welcome_link">Link your devices</string>
+    <string name="welcome_link_desc">Please connect this device to your Bluetooth earbuds to start Auditus.</string>
+
+    <string name="welcome_setup">Quick set up</string>
+    <string name="welcome_setup_desc">Place the earbud with the microphone (usually right earbud) inside your protective mask.\n\nThis will allow you to speak through your device\'s speakers.</string>
+    <string name="start_auditus">START AUDITUS</string>
 </resources>

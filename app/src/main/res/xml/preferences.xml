@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        app:iconSpaceReserved="false"
+        app:key="pass_cat"
+        app:title="@string/devices">
+
+        <ListPreference
+            app:iconSpaceReserved="false"
+            app:key="recording"
+            app:persistent="false"
+            app:title="@string/recording_device" />
+
+        <ListPreference
+            app:iconSpaceReserved="false"
+            app:key="playback"
+            app:persistent="false"
+            app:title="@string/playback_device" />
+
+    </PreferenceCategory>
+
+</PreferenceScreen>

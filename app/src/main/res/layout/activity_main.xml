@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
     <ImageView
         android:id="@+id/imgLogo"
@@ -34,7 +34,6 @@
         android:layout_height="@dimen/icon_height"
         android:layout_marginTop="@dimen/margin_top"
         android:layout_marginEnd="@dimen/margin_side"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_settings" />
@@ -82,10 +81,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_rounded"
-            android:text="@string/go_to_settings"
-            android:textColor="@color/white"
             android:paddingStart="54dp"
             android:paddingEnd="54dp"
+            android:text="@string/go_to_settings"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -98,6 +97,7 @@
         android:id="@+id/imgNoPlayback"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/margin_side"
         android:scaleType="fitXY"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -111,31 +111,31 @@
         android:id="@+id/imgInternalSpeaker"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/margin_side"
         android:scaleType="fitXY"
         android:visibility="gone"
-        tools:visibility="visible"
-        android:layout_marginEnd="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1020:977"
+        app:layout_constraintDimensionRatio="1020:869"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/internal_speaker" />
+        app:srcCompat="@drawable/internal_speaker"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/imgWiredSpeaker"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginEnd="@dimen/margin_side"
         android:scaleType="fitXY"
-        android:layout_marginEnd="2dp"
         android:visibility="gone"
-        tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintDimensionRatio="1020:977"
+        app:layout_constraintDimensionRatio="1019:869"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/wired_speaker" />
+        app:srcCompat="@drawable/wired_speaker"
+        tools:visibility="visible" />
 
 
     <ImageView
@@ -143,22 +143,34 @@
         android:layout_width="@dimen/btn_play_size"
         android:layout_height="@dimen/btn_play_size"
         android:layout_marginBottom="@dimen/margin_bottom"
-        android:visibility="gone"
-        tools:visibility="visible"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_play" />
+        app:srcCompat="@drawable/ic_play"
+        tools:visibility="visible" />
 
     <ImageView
         android:id="@+id/btnPause"
         android:layout_width="@dimen/btn_play_size"
         android:layout_height="@dimen/btn_play_size"
         android:layout_marginBottom="@dimen/margin_bottom"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@drawable/ic_pause" />
+
+    <ImageView
+        android:id="@+id/btnDictation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        tools:visibility="visible"
+        app:layout_constraintTop_toTopOf="@id/btnPause"
+        app:layout_constraintBottom_toBottomOf="@id/btnPause"
+        app:layout_constraintStart_toEndOf="@id/btnPause"
+        android:layout_marginStart="24dp"
+        app:srcCompat="@drawable/ic_dictation" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
