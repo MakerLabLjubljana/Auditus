@@ -1,4 +1,4 @@
-package com.example.auditus
+package si.zascitimo.auditus.audio
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothHeadset
@@ -19,8 +19,6 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import si.zascitimo.auditus.*
-import si.zascitimo.auditus.audio.ActiveDevices
-import si.zascitimo.auditus.audio.AudioDevicesState
 import timber.log.Timber
 
 class AudioRouter(
@@ -57,6 +55,12 @@ class AudioRouter(
             updateState()
         }
     var customPlaybackDevice: Int? = prefs.playbackDevice
+        set(value) {
+            field = value
+            updateState()
+        }
+
+    var skipBtDevice = false
         set(value) {
             field = value
             updateState()
@@ -188,19 +192,19 @@ class AudioRouter(
                 activeDevice?.customPlayback
             )
 
-        if (recordingDevice == null) {
+        if (recordingDevice == null && !skipBtDevice) {
             Timber.w("Missing recordingDevice")
             Toast.makeText(context, "Missing recordingDevice", Toast.LENGTH_LONG).show()
             stopNativeStream()
             return false
         }
 
-        if (playbackDevice == null) {
-            Timber.w("Missing playbackDevice")
-            Toast.makeText(context, "Missing playbackDevice", Toast.LENGTH_LONG).show()
-            stopNativeStream()
-            return false
-        }
+//        if (playbackDevice == null) {
+//            Timber.w("Missing playbackDevice")
+//            Toast.makeText(context, "Missing playbackDevice", Toast.LENGTH_LONG).show()
+//            stopNativeStream()
+//            return false
+//        }
 
         if (recordingDevice != currentRecordingDevice || playbackDevice != currentPlaybackDevice) {
             currentRecordingDevice = recordingDevice
@@ -210,7 +214,7 @@ class AudioRouter(
 
             mutableIsStreamActive.value = true
 
-            startStream(recordingDevice.id, playbackDevice.id)
+            startStream(recordingDevice?.id ?: 0, playbackDevice?.id ?: 0)
         }
         return true
     }
@@ -278,7 +282,8 @@ class AudioRouter(
             internalSpeaker = internalSpeaker,
             btDevice = btDevice,
             customRecording = customRecording,
-            customPlayback = customPlayback
+            customPlayback = customPlayback,
+            skipBt = skipBtDevice
         )
 
         if (isStarted && isInited) {

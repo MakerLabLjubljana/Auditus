@@ -58,18 +58,6 @@
             app:layout_constraintTop_toBottomOf="@id/imgLogo"
             tools:text="version 1.0 (beta)" />
 
-        <TextView
-            android:id="@+id/tvAbout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="22dp"
-            android:fontFamily="sans-serif-medium"
-            android:text="@string/about"
-            android:textColor="@color/textPrimaryColor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvVersion" />
-
         <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -78,7 +66,7 @@
             app:layout_constraintBottom_toTopOf="@+id/tvLink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvAbout">
+            app:layout_constraintTop_toBottomOf="@+id/tvVersion">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -125,14 +113,6 @@
                     android:text="@string/guide4"
                     android:textColor="@color/textPrimaryColor"
                     android:textSize="14sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="22dp"
-                    android:text="@string/disclaimer"
-                    android:textColor="@color/textPrimaryColor"
-                    android:textSize="12sp" />
 
             </LinearLayout>
         </ScrollView>

@@ -1,5 +1,8 @@
 package si.zascitimo.auditus.main
 
+import android.R.attr.label
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognitionListener
@@ -8,9 +11,11 @@ import android.speech.SpeechRecognizer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import si.zascitimo.auditus.RoundedDialogFragment
 import si.zascitimo.auditus.databinding.FragmentSttBinding
 import timber.log.Timber
+import java.lang.Exception
 
 
 class STTFragment : RoundedDialogFragment() {
@@ -30,6 +35,35 @@ class STTFragment : RoundedDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.btnClose.setOnClickListener { dismiss() }
+
+        binding.btnCopy.setOnClickListener {
+            val text = binding.txtDictation.text
+            if (text.isNullOrEmpty()) {
+                return@setOnClickListener
+            }
+            val clipboard = ContextCompat.getSystemService(requireContext(), ClipboardManager::class.java)
+            val clip = ClipData.newPlainText("Dictation", binding.txtDictation.text)
+            clipboard?.setPrimaryClip(clip)
+        }
+
+        binding.btnShare.setOnClickListener {
+            val text = binding.txtDictation.text
+            if (text.isNullOrEmpty()) {
+                return@setOnClickListener
+            }
+            val sendIntent: Intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, text)
+                type = "text/plain"
+            }
+
+            try {
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                startActivity(shareIntent)
+            } catch (e: Exception) {
+
+            }
+        }
 
         start()
     }

@@ -90,6 +90,18 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgNoMic" />
 
+        <Button
+            android:id="@+id/btnBtSkip"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_rounded"
+            android:layout_marginTop="22dp"
+            android:text="@string/skip"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/btnBtSettings"
+            app:layout_constraintStart_toStartOf="@id/btnBtSettings"
+            app:layout_constraintTop_toBottomOf="@id/btnBtSettings" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

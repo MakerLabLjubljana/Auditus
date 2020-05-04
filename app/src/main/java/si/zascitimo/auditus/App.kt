@@ -2,8 +2,8 @@ package si.zascitimo.auditus
 
 import android.app.Application
 import androidx.lifecycle.MediatorLiveData
-import com.example.auditus.AudioRouter
 import si.zascitimo.auditus.audio.ActiveDevices
+import si.zascitimo.auditus.audio.AudioRouter
 import si.zascitimo.auditus.audio.AudioStatus
 import timber.log.Timber
 
